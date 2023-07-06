@@ -35,6 +35,6 @@ class tiktok_utils:
         return date_time
 
 if __name__ == "__main__":
-    time = tiktok_utils.get_time("https://www.tiktok.com/t/ZT8eKmrm8/")
+    time = tiktok_utils.get_time("https://www.tiktok.com/t/ZT8eKsbgF/")
 
     print(time)
