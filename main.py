@@ -1,6 +1,6 @@
 import requests, datetime
 
-class tiktok_utils:
+class TiktokUtils:
     class Video:
         '''
         A TikTok video
@@ -11,12 +11,12 @@ class tiktok_utils:
         upload_time = None
 
         def __init__(self, url) -> None:
-            if tiktok_utils.is_short_url(url): self.short_url = url
+            if TiktokUtils.is_short_url(url): self.short_url = url
             # TODO: Get short URL even if it is not initially provided.
 
-            self.url         = tiktok_utils.ensure_full_url(url)
-            self.id          = tiktok_utils.get_id(self.url)
-            self.upload_time = tiktok_utils.get_time(self.url)
+            self.url         = TiktokUtils.ensure_full_url(url)
+            self.id          = TiktokUtils.get_id(self.url)
+            self.upload_time = TiktokUtils.get_time(self.url)
 
     def get_id(full_url: str) -> int:
         '''
@@ -47,16 +47,16 @@ class tiktok_utils:
         return False
     
     def ensure_full_url(url: str) -> str:
-        if tiktok_utils.is_short_url(url):
-            full_url = tiktok_utils.get_full_url(url)
+        if TiktokUtils.is_short_url(url):
+            full_url = TiktokUtils.get_full_url(url)
             return full_url
         return url
 
     def get_time(url: str) -> datetime.datetime:
-        if tiktok_utils.is_short_url(url):
-            url = tiktok_utils.get_full_url(url)
+        if TiktokUtils.is_short_url(url):
+            url = TiktokUtils.get_full_url(url)
 
-        id = tiktok_utils.get_id(url)
+        id        = TiktokUtils.get_id(url)
         binary    = bin(id)
         binary_32 = binary[0:33]                               # Going to 33 to account for "0b"
         unix_time = int(binary_32, 2)
@@ -65,6 +65,6 @@ class tiktok_utils:
         return date_time
 
 if __name__ == "__main__":
-    tiktok_video = tiktok_utils.Video("https://www.tiktok.com/t/ZT8eKsbgF/")
+    tiktok_video = TiktokUtils.Video("https://www.tiktok.com/t/ZT8eKsbgF/")
 
     for data in tiktok_video.__dict__: print(f"{data}: {tiktok_video.__dict__[data]}")
